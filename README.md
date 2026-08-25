@@ -1,52 +1,73 @@
-# AI Portfolio (With A Reveal)
+# Handcrafted Space Portfolio
 
-This is my portfolio, but with a twist:
+A concise, static personal portfolio built with Next.js App Router, TypeScript, Tailwind CSS, and Motion. The interface is deliberately precise and editorial; the supplied paper artwork carries the expressive visual identity.
 
-- **The top section** is a deliberately over-the-top, AI-crafted “showpiece” (themes, cursor modes, heavy motion).
-- **Then it breaks character** and admits the truth: this part is AI-coded, and I’m not a web developer.
-- **Below that** is the real me: a mechanical engineer who likes building things, plus the actual projects and links.
-
-## Stack
-
-- React + TypeScript (Vite)
-- Tailwind CSS
-- Framer Motion (animations)
-- Lucide (icons)
-
-## Run Locally
-
-Recommended: Node.js `20.19+` (or `22+`) and npm `10+`.
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Other scripts:
+Open `http://localhost:3000`.
+
+Production checks:
 
 ```bash
-npm run build
-npm run preview
+npm run typecheck
 npm run lint
-```
-
-## Where To Edit Things
-
-- AI intro section (themes, cursor, “overclock” button): `src/components/hero/`
-- The reveal / “this was AI” transition copy: `src/components/hero/HeroRevealLayer.tsx`
-- Theme-specific overclock effects (signature theme): `src/components/themes/signature/overclock/`
-- Bio, real projects + contact links: `src/components/RealPortfolio.tsx`
-- Theme definitions / modules / rotation: `src/components/themes/`
-- Global styling: `src/index.css`
-
-`RealPortfolio.tsx` currently contains placeholder project cards and links; swap them for your real work.
-
-## Deploy
-
-This is a static Vite build.
-
-```bash
 npm run build
 ```
 
-Output is in `dist/` (serve it with any static host, or use `npm run preview` locally).
+The static site is exported to `out/`.
+
+## Customize the portfolio
+
+All owner-editable copy, projects, capabilities, contact details, navigation, and social links live in `config/portfolio.ts`.
+
+Update these placeholders before publishing:
+
+- `Alex Morgan`, `AM`, and the location
+- `hello@example.com`
+- the three starter project descriptions and links
+- GitHub and LinkedIn URLs
+- the canonical `metadataBase` URL in `app/layout.tsx`
+
+## Artwork and space traffic
+
+The source artwork remains unchanged in `assets/`. Smaller transparent WebP derivatives in `public/assets/optimized/` reduce initial transfer size while retaining the paper texture.
+
+Asset inventory:
+
+| Files | Category | Initial use |
+| --- | --- | --- |
+| `rocket-1.png`, `rocket-2.png` | Rockets | Traffic, hero |
+| `satellite-1.png`, `satellite-2.png` | Satellites | Traffic |
+| `planet-1.png`, `planet-2.png` | Planets / moon | Reserved, hero distance layer |
+| `meterioide-1.png` | Meteor | Traffic |
+| `nebula-1.png` | Layered cloud / smoke | Subtle hero depth layer |
+
+Every source file is a 1254×1254 8-bit RGBA PNG with transparency.
+
+Register additional flyby artwork in `config/spaceAssets.ts`. Each entry controls its type, weighted rarity, scale, duration, opacity, and base render size; no new React component is needed. `SpaceTraffic` waits 8–18 seconds before the first pass, then considers another pass roughly every 15–40 seconds. It keeps at most one object mounted, art-directs several curved trajectories, adds sub-pixel stop-motion jitter, uses quieter mobile timings, and disables itself for reduced-motion users.
+
+## GitHub Pages
+
+The included workflow in `.github/workflows/deploy.yml` builds and deploys on pushes to `main`.
+
+1. Push the repository to GitHub.
+2. In **Settings → Pages**, choose **GitHub Actions** as the source.
+3. Push to `main` or run the workflow manually.
+
+The workflow automatically sets the correct base path:
+
+- `https://username.github.io/`: no base path
+- `https://username.github.io/repository-name/`: `/repository-name`
+
+For a manual repository-subpath build, run:
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/repository-name npm run build
+```
+
+All public artwork and favicon references pass through `config/paths.ts`, so changing the base path does not require component edits.
