@@ -18,9 +18,8 @@ export const portfolio = {
       "Mechanical engineering student working across technology, product development, and ambitious side projects.",
   },
   navigation: [
-    { label: "Work", href: "#work" },
     { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
+    { label: "Work", href: "#work" },
     { label: "Contact", href: "#contact" },
   ],
   hero: {

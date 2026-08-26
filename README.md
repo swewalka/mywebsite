@@ -25,6 +25,8 @@ The static site is exported to `out/`.
 
 All owner-editable copy, projects, capabilities, contact details, navigation, and social links live in `config/portfolio.ts`.
 
+The Skills section is currently hidden from both the page and navigation. Its component and content remain in `components/Skills.tsx` and `config/portfolio.ts`; restore the import and `<Skills />` in `app/page.tsx`, then add its `#skills` link back to the navigation array when it is ready to publish.
+
 Update these placeholders before publishing:
 
 - `Simon Wewalka`, `SW`, and the location

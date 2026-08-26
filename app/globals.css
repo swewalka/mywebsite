@@ -252,8 +252,15 @@ button {
   animation: star-twinkle 7s ease-in-out infinite;
 }
 
-.flying-object {
+.space-traffic-layer {
   position: fixed;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flying-object {
+  position: absolute;
   z-index: 1;
   top: 0;
   left: 0;

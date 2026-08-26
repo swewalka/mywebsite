@@ -64,6 +64,7 @@ function createFlight(id: number, isMobile: boolean): Flight {
 
 export function SpaceTraffic() {
   const reduceMotion = useReducedMotion();
+  const [trafficOpacity, setTrafficOpacity] = useState(0);
   const [flight, setFlight] = useState<Flight | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nextId = useRef(0);
@@ -73,6 +74,36 @@ export function SpaceTraffic() {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
+  }, []);
+
+  useEffect(() => {
+    const hero = document.getElementById("top");
+    if (!hero) return;
+
+    let frameId: number | null = null;
+
+    const updateOpacity = () => {
+      frameId = null;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const nebulaFadeHeight = Math.min(window.innerHeight * 0.34, 360);
+      const opacity = Math.max(0, Math.min(1, 1 - heroBottom / nebulaFadeHeight));
+      setTrafficOpacity(opacity);
+    };
+
+    const requestUpdate = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateOpacity);
+    };
+
+    updateOpacity();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
@@ -119,6 +150,8 @@ export function SpaceTraffic() {
   };
 
   return flight ? (
-    <FlyingSpaceObject key={flight.id} flight={flight} onComplete={handleComplete} />
+    <div className="space-traffic-layer" style={{ opacity: trafficOpacity }}>
+      <FlyingSpaceObject key={flight.id} flight={flight} onComplete={handleComplete} />
+    </div>
   ) : null;
 }
