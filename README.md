@@ -41,16 +41,16 @@ Asset inventory:
 
 | Files | Category | Initial use |
 | --- | --- | --- |
-| `rocket-1.png`, `rocket-2.png` | Rockets | Traffic / reserved variants |
+| `rocket-1.png`, `rocket-2.png` | Rockets | Reserved variants |
 | `Rocket/rocket.png`, `Rocket/propulsion-*.png` | Launch rocket and flame frames | Intro launch sequence |
-| `satellite-1.png`, `satellite-2.png` | Satellites | Traffic |
+| `satellite-1.png`, `satellite-2.png` | Satellites | Flyby traffic |
 | `planet-1.png`, `planet-2.png` | Planets / moon | Launch origin and orbital destination |
-| `meterioide-1.png` | Meteor | Traffic |
+| `meterioide-1.png` | Meteor | Reserved variant |
 | `nebula-1.png` | Layered cloud / smoke | Subtle hero depth layer |
 
 The original scene assets and launch rocket are 1254×1254 8-bit RGBA PNGs. The five transparent propulsion frames are 1086×1448 PNGs.
 
-Register additional flyby artwork in `config/spaceAssets.ts`. Each entry controls its type, weighted rarity, scale, duration, opacity, and base render size; no new React component is needed. `SpaceTraffic` waits 8–18 seconds before the first pass, then considers another pass roughly every 15–40 seconds. It keeps at most one object mounted, art-directs several smooth curved trajectories, uses quieter mobile timings, and disables itself for reduced-motion users. The intro rocket is assembled from a separate body and five propulsion frames in `LaunchRocket.tsx`; its path and scale remain smooth while only the flame artwork flickers.
+Register additional satellite flyby artwork in `config/spaceAssets.ts`. Each entry controls its weighted rarity, scale, duration, brightness, and base render size; no new React component is needed. `SpaceTraffic` waits 8–18 seconds before the first pass, then considers another pass roughly every 15–40 seconds. It keeps at most one satellite mounted, art-directs several smooth curved trajectories with a slow rotational drift, uses quieter mobile timings, and disables itself for reduced-motion users. The intro rocket is assembled from a separate body and five propulsion frames in `LaunchRocket.tsx`; its path and scale remain smooth while only the flame artwork flickers.
 
 ## GitHub Pages
 

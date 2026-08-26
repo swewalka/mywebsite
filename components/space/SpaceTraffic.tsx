@@ -16,6 +16,22 @@ function between(min: number, max: number): number {
   return min + Math.random() * (max - min);
 }
 
+function reversePath(path: FlightPath): FlightPath {
+  return {
+    x: [path.x[2], path.x[1], path.x[0]],
+    y: [path.y[2], path.y[1], path.y[0]],
+    rotation: [path.rotation[2], path.rotation[1], path.rotation[0]],
+  };
+}
+
+function choosePath(): FlightPath {
+  const path = paths[Math.floor(Math.random() * paths.length)];
+  const shouldTravelRight = Math.random() < 0.5;
+  const travelsRight = path.x[2] > path.x[0];
+
+  return shouldTravelRight === travelsRight ? path : reversePath(path);
+}
+
 function chooseWeightedAsset(): SpaceAsset {
   const totalWeight = trafficAssets.reduce((sum, asset) => sum + asset.weight, 0);
   let point = Math.random() * totalWeight;
@@ -31,11 +47,8 @@ function chooseWeightedAsset(): SpaceAsset {
 function createFlight(id: number, isMobile: boolean): Flight {
   const asset = chooseWeightedAsset();
   const scale = between(...asset.scale) * (isMobile ? 0.72 : 1);
-  const basePath = paths[Math.floor(Math.random() * paths.length)];
-  const path =
-    asset.type === "meteor"
-      ? paths[Math.floor(Math.random() * 2)]
-      : basePath;
+  const path = choosePath();
+  const driftDirection = Math.random() < 0.5 ? -1 : 1;
 
   return {
     id,
@@ -43,8 +56,9 @@ function createFlight(id: number, isMobile: boolean): Flight {
     path,
     duration: between(...asset.duration) * (isMobile ? 1.12 : 1),
     width: Math.round(asset.baseWidth * scale),
-    opacity: between(...asset.opacity),
-    blur: asset.type === "satellite" ? between(0, 0.8) : between(0, 0.35),
+    brightness: between(...asset.brightness),
+    blur: between(0, 0.8),
+    rotationDrift: driftDirection * between(30, 56),
   };
 }
 

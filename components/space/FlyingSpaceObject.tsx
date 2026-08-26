@@ -17,8 +17,9 @@ export type Flight = {
   path: FlightPath;
   duration: number;
   width: number;
-  opacity: number;
+  brightness: number;
   blur: number;
+  rotationDrift: number;
 };
 
 export function FlyingSpaceObject({
@@ -50,18 +51,27 @@ export function FlyingSpaceObject({
         times: [0, 0.52, 1],
       }}
       onAnimationComplete={onComplete}
-      style={{ opacity: flight.opacity, filter: `blur(${flight.blur}px)` }}
+      style={{
+        filter: `brightness(${flight.brightness}) saturate(0.72) contrast(0.94) blur(${flight.blur}px)`,
+      }}
     >
-      <Image
-        className="flying-object-image"
-        src={withBasePath(flight.asset.src)}
-        width={flight.asset.baseWidth}
-        height={flight.asset.baseWidth}
-        alt=""
-        decoding="async"
-        unoptimized
-        style={{ width: flight.width, height: flight.width }}
-      />
+      <motion.div
+        className="flying-object-drift"
+        initial={{ rotate: 0 }}
+        animate={{ rotate: flight.rotationDrift }}
+        transition={{ duration: flight.duration, ease: "linear" }}
+      >
+        <Image
+          className="flying-object-image"
+          src={withBasePath(flight.asset.src)}
+          width={flight.asset.baseWidth}
+          height={flight.asset.baseWidth}
+          alt=""
+          decoding="async"
+          unoptimized
+          style={{ width: flight.width, height: flight.width }}
+        />
+      </motion.div>
     </motion.div>
   );
 }

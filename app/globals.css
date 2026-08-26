@@ -131,6 +131,7 @@ button {
 /* Navigation */
 .site-nav {
   position: fixed;
+  z-index: 5;
   top: 0;
   right: 0;
   left: 0;
@@ -260,7 +261,12 @@ button {
 }
 
 .flying-object--satellite {
-  z-index: 1;
+  z-index: 3;
+}
+
+.flying-object-drift {
+  transform-origin: center;
+  will-change: transform;
 }
 
 .flying-object-image {
@@ -485,6 +491,7 @@ button {
 .hero-index {
   display: flex;
   position: absolute;
+  z-index: 4;
   bottom: 2.1rem;
   left: 0;
   gap: 1.2rem;
@@ -495,6 +502,12 @@ button {
 }
 
 /* Projects */
+.section,
+.contact-section {
+  position: relative;
+  z-index: 4;
+}
+
 .project-list {
   margin-top: clamp(3.5rem, 6vw, 5rem);
   border-top: 1px solid var(--line);
