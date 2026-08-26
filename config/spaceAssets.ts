@@ -67,7 +67,15 @@ export const trafficAssets: readonly SpaceAsset[] = [
 ];
 
 export const heroAssets = {
-  rocket: "/assets/optimized/rocket-2.webp",
-  planet: "/assets/optimized/planet-2.webp",
+  planet: "/assets/optimized/planet-1.webp",
+  orbitPlanet: "/assets/optimized/planet-2.webp",
   cloud: "/assets/optimized/nebula-1.webp",
+  launchRocket: "/assets/optimized/launch-rocket.webp",
+  propulsion: [
+    "/assets/optimized/propulsion-1.webp",
+    "/assets/optimized/propulsion-2.webp",
+    "/assets/optimized/propulsion-3.webp",
+    "/assets/optimized/propulsion-4.webp",
+    "/assets/optimized/propulsion-5.webp",
+  ],
 } as const;

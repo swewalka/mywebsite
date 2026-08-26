@@ -4,6 +4,7 @@ import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/reac
 import type { PointerEvent } from "react";
 import { heroAssets } from "@/config/spaceAssets";
 import { withBasePath } from "@/config/paths";
+import { LaunchRocket } from "./LaunchRocket";
 
 export function HeroArtwork() {
   const reduceMotion = useReducedMotion();
@@ -49,41 +50,36 @@ export function HeroArtwork() {
         animate={{ opacity: 0.2 }}
         transition={{ duration: 1.2 }}
       />
-      <motion.img
-        className="hero-planet"
-        src={withBasePath(heroAssets.planet)}
-        width="420"
-        height="420"
-        alt=""
-        decoding="async"
-        style={{ x: springX, y: springY }}
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 0.82, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.25 }}
-      />
-      <motion.div
-        className="hero-rocket-wrap"
-        style={{ x: springX, y: springY }}
-        initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <div className="hero-planet-wrap">
         <motion.img
-          className="hero-rocket"
-          src={withBasePath(heroAssets.rocket)}
-          width="900"
-          height="900"
+          className="hero-planet"
+          src={withBasePath(heroAssets.planet)}
+          width="420"
+          height="420"
           alt=""
           fetchPriority="high"
           decoding="async"
-          animate={
-            reduceMotion
-              ? undefined
-              : { y: [-2.5, 2.5, -2.5], rotate: [-0.25, 0.2, -0.25] }
-          }
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ x: springX, y: springY }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 0.76, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.25 }}
         />
-      </motion.div>
+      </div>
+      <div className="hero-orbit-planet-wrap">
+        <motion.img
+          className="hero-orbit-planet"
+          src={withBasePath(heroAssets.orbitPlanet)}
+          width="420"
+          height="420"
+          alt=""
+          decoding="async"
+          style={{ x: springX, y: springY }}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 0.72, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.45 }}
+        />
+      </div>
+      <LaunchRocket />
       <span className="artwork-orbit" />
       <span className="artwork-caption">ASSEMBLED / PAPER STUDY 02</span>
     </div>

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: withBasePath("/assets/optimized/rocket-2.webp"),
-        width: 900,
-        height: 900,
+        url: withBasePath("/assets/optimized/launch-rocket.webp"),
+        width: 720,
+        height: 720,
         alt: "Handcrafted paper rocket",
       },
     ],

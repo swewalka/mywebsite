@@ -267,7 +267,6 @@ button {
   display: block;
   max-width: none;
   object-fit: contain;
-  animation: handmade-jitter 680ms steps(4, end) infinite;
   transform-origin: center;
 }
 
@@ -375,30 +374,79 @@ button {
   left: 42%;
 }
 
-.hero-rocket-wrap {
+.hero-planet-wrap {
   position: absolute;
-  z-index: 3;
-  top: 1%;
-  right: 1%;
-  width: min(54vw, 770px);
-}
-
-.hero-rocket {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.24));
-  transform: rotate(-1deg);
+  z-index: 1;
+  top: 16%;
+  left: 74%;
+  width: clamp(112px, 11vw, 170px);
+  transform: translateX(-50%);
 }
 
 .hero-planet {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.74) brightness(0.68);
+}
+
+.hero-orbit-planet-wrap {
+  position: absolute;
+  z-index: 2;
+  top: calc(8% + 42vh + clamp(75px, 6.16vw, 97px));
+  left: calc(74% - 58vw);
+  width: clamp(96px, 8vw, 136px);
+  transform: translate(-50%, -50%);
+}
+
+.hero-orbit-planet {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.68) brightness(0.62);
+}
+
+.launch-rocket-stage {
+  --launch-width: clamp(340px, 28vw, 440px);
+  position: absolute;
+  z-index: 3;
+  top: 8%;
+  left: 74%;
+  width: var(--launch-width);
+  margin-left: calc(var(--launch-width) * -0.5);
+  transform-origin: 50% 22%;
+  will-change: transform, opacity;
+}
+
+.launch-rocket-body {
+  display: block;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.2));
+}
+
+.launch-flame-stack {
   position: absolute;
   z-index: 1;
-  top: 5.5%;
-  right: 15%;
-  width: clamp(88px, 9vw, 150px);
-  height: auto;
-  filter: saturate(0.78) brightness(0.72);
+  top: 88.5%;
+  left: 50%;
+  width: 86.67%;
+  aspect-ratio: 1086 / 1448;
+  animation: flame-breath 780ms ease-in-out infinite alternate;
+  transform: translateX(-50%);
+  transform-origin: 50% 0;
+}
+
+.launch-flame-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  object-fit: contain;
+  animation: flame-flicker 440ms steps(1, end) infinite;
 }
 
 .hero-cloud {
@@ -766,11 +814,14 @@ button {
   58% { opacity: 0.38; transform: scale(0.92); }
 }
 
-@keyframes handmade-jitter {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(0.45px, -0.35px) rotate(0.22deg); }
-  50% { transform: translate(-0.35px, 0.4px) rotate(-0.18deg); }
-  75% { transform: translate(0.2px, 0.15px) rotate(0.12deg); }
+@keyframes flame-flicker {
+  0%, 19.9% { opacity: 1; }
+  20%, 100% { opacity: 0; }
+}
+
+@keyframes flame-breath {
+  from { transform: translateX(-50%) scaleY(0.97); }
+  to { transform: translateX(-50%) scaleY(1.015); }
 }
 
 @media (max-width: 1100px) {
@@ -785,11 +836,6 @@ button {
   .hero-artwork {
     right: -15vw;
     left: 45%;
-  }
-
-  .hero-rocket-wrap {
-    top: 8%;
-    width: min(63vw, 690px);
   }
 
   .project-row {
@@ -903,16 +949,22 @@ button {
     height: 500px;
   }
 
-  .hero-rocket-wrap {
-    top: -2%;
-    right: 4%;
-    width: min(118vw, 610px);
+  .hero-planet-wrap {
+    top: 8%;
+    left: 58%;
+    width: 104px;
   }
 
-  .hero-planet {
-    top: 1%;
-    right: 32%;
-    width: 90px;
+  .launch-rocket-stage {
+    --launch-width: min(72vw, 280px);
+    top: 0;
+    left: 58%;
+  }
+
+  .hero-orbit-planet-wrap {
+    top: calc(42vh + min(15.84vw, 61.6px));
+    left: calc(58% - 58vw);
+    width: 60px;
   }
 
   .hero-cloud {
@@ -1034,8 +1086,17 @@ button {
     height: 450px;
   }
 
-  .hero-rocket-wrap {
-    width: 126vw;
+  .hero-planet-wrap {
+    top: 6%;
+    left: 57%;
+  }
+
+  .launch-rocket-stage {
+    left: 57%;
+  }
+
+  .hero-orbit-planet-wrap {
+    left: calc(57% - 58vw);
   }
 
   .focus-list ul {
