@@ -472,8 +472,7 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(0.7) brightness(0.6) contrast(0.95)
-    drop-shadow(0 34px 60px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 34px 60px rgba(0, 0, 0, 0.28));
 }
 
 .hero-orbit-planet-wrap {
@@ -489,7 +488,7 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(0.62) brightness(0.56) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3));
+  filter: saturate(0.78) brightness(0.74) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3));
 }
 
 .launch-rocket-stage {
@@ -511,7 +510,7 @@ button {
   width: 100%;
   height: auto;
   backface-visibility: hidden;
-  filter: saturate(0.58) brightness(0.64) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.2));
+  filter: saturate(0.76) brightness(0.78) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.2));
 }
 
 .launch-flame-stack {
@@ -716,114 +715,210 @@ button {
   z-index: 4;
 }
 
-.project-list {
-  margin-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid var(--line);
+.work-heading h2 {
+  max-width: 580px;
+  color: #deddd8;
+  font-size: clamp(2rem, 3.4vw, 3.35rem);
+  line-height: 1.08;
 }
 
-.project-row {
+.project-list {
+  display: grid;
+  gap: clamp(8.5rem, 14vw, 11.25rem);
+  margin-top: clamp(6.5rem, 11vw, 9rem);
+}
+
+.project-entry {
   display: grid;
   position: relative;
-  grid-template-columns: 88px minmax(0, 1fr) 40px;
-  gap: 1.5rem;
-  padding: 2rem 0;
-  border-bottom: 1px solid var(--line);
-  transition: border-color 200ms ease;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(4rem, 9vw, 9rem);
+  align-items: center;
 }
 
-.project-row::before {
+.project-entry::before {
   position: absolute;
-  top: -1px;
+  top: -3rem;
   left: 0;
-  width: 0;
+  width: 42px;
   height: 1px;
-  background: var(--copper);
+  background: rgba(238, 232, 220, 0.16);
   content: "";
-  transition: width 300ms ease;
 }
 
-.project-row:hover::before {
-  width: 88px;
+.project-entry--planet-right .project-visual {
+  grid-column: 2;
+  grid-row: 1;
 }
 
-.project-number,
-.project-year,
-.project-body li {
+.project-entry--planet-right .project-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.project-visual {
+  display: grid;
+  min-width: 0;
+  min-height: 480px;
+  place-items: center;
+}
+
+.project-planet-reveal {
+  display: grid;
+  position: relative;
+  width: min(100%, 400px);
+  aspect-ratio: 1;
+  place-items: center;
+  isolation: isolate;
+  transition: scale 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.project-planet-reveal--medium {
+  width: min(92%, 380px);
+}
+
+.project-planet-reveal--large {
+  width: min(100%, 455px);
+}
+
+.project-planet-reveal--wide {
+  width: min(100%, 440px);
+}
+
+.project-entry:hover .project-planet-reveal {
+  scale: 1.015;
+}
+
+.project-planet-halo {
+  position: absolute;
+  z-index: -1;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(53, 119, 131, 0.13);
+  filter: blur(58px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.project-entry:nth-child(2) .project-planet-halo {
+  background: rgba(182, 88, 48, 0.12);
+}
+
+.project-entry:nth-child(3) .project-planet-halo {
+  background: rgba(101, 130, 158, 0.13);
+}
+
+.project-planet {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.24));
+  transform-origin: center;
+  will-change: transform;
+}
+
+.project-copy {
+  max-width: 540px;
+}
+
+.project-index {
+  margin: 0 0 2.15rem;
   color: var(--muted-deep);
   font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.09em;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.project-number {
-  padding-top: 0.45rem;
-}
-
-.project-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.project-body h3 {
+.project-copy h3 {
   margin: 0;
   color: #e4e2dc;
-  font-size: clamp(1.45rem, 2.2vw, 2.15rem);
-  font-weight: 480;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.15rem, 4vw, 4.15rem);
+  font-weight: 450;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
   transition: color 180ms ease;
 }
 
-.project-row:hover h3 {
-  color: #fffaf0;
+.project-entry:hover .project-copy h3 {
+  color: #f2d4c2;
 }
 
-.project-body > p {
-  max-width: 690px;
-  margin: 0.9rem 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.65;
+.project-description {
+  max-width: 510px;
+  margin: 1.6rem 0 0;
+  color: #aeb6c0;
+  font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+  line-height: 1.72;
 }
 
-.project-body ul {
+.project-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem 1.2rem;
-  margin: 1.15rem 0 0;
-  padding: 0;
-  list-style: none;
+  gap: 0.45rem 0;
+  margin: 1.55rem 0 0;
+  color: var(--muted-deep);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.075em;
+  line-height: 1.6;
+  text-transform: uppercase;
 }
 
-.project-body li + li::before {
-  margin-right: 1.2rem;
+.project-meta i {
+  margin-inline: 0.75rem;
   color: rgba(238, 232, 220, 0.22);
-  content: "·";
+  font-style: normal;
 }
 
-.project-link {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  align-self: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: #b8c0ca;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease;
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.8rem;
+  margin-top: 2.15rem;
 }
 
-.project-row:hover .project-link {
-  border-color: rgba(199, 107, 66, 0.5);
-  color: var(--copper-light);
+.project-links a {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: 0.32rem;
+  color: #d1d1cc;
+  font-size: 0.83rem;
+  letter-spacing: 0.02em;
+  transition: color 180ms ease;
 }
 
-.project-row:hover .project-link .arrow-icon {
-  transform: translateX(3px);
+.project-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(199, 107, 66, 0.5);
+  content: "";
+  transform: scaleX(0.28);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.project-links a span {
+  transition: transform 200ms ease;
+}
+
+.project-links a:hover {
+  color: var(--paper);
+}
+
+.project-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.project-links a:hover span {
+  transform: translate(3px, -2px);
 }
 
 /* About */
@@ -1202,8 +1297,17 @@ button {
     left: 72%;
   }
 
-  .project-row {
-    grid-template-columns: 64px minmax(0, 1fr) 40px;
+  .project-entry {
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .project-visual {
+    min-height: 400px;
+  }
+
+  .project-planet-reveal--large {
+    width: min(100%, 410px);
   }
 }
 
@@ -1357,31 +1461,63 @@ button {
     height: 43vw;
   }
 
-  .project-row {
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1.75rem 0;
+  .work-heading h2 {
+    max-width: 460px;
   }
 
-  .project-link {
-    display: none;
+  .project-list {
+    gap: 8rem;
+    margin-top: 5.5rem;
   }
 
-  .project-title-row {
-    display: block;
+  .project-entry,
+  .project-entry--planet-right {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
   }
 
-  .project-year {
-    display: inline-block;
-    margin-top: 0.65rem;
+  .project-entry--planet-right .project-visual,
+  .project-entry--planet-right .project-copy,
+  .project-visual,
+  .project-copy {
+    grid-column: 1;
+    grid-row: auto;
   }
 
-  .project-body li + li::before {
-    margin-right: 0.7rem;
+  .project-visual {
+    min-height: 0;
+    justify-items: center;
   }
 
-  .project-body ul {
-    gap: 0.45rem 0.7rem;
+  .project-entry:nth-child(even) .project-visual {
+    justify-items: end;
+  }
+
+  .project-entry:nth-child(odd) .project-visual {
+    justify-items: start;
+  }
+
+  .project-planet-reveal,
+  .project-planet-reveal--medium,
+  .project-planet-reveal--large,
+  .project-planet-reveal--wide {
+    width: clamp(230px, 70vw, 300px);
+  }
+
+  .project-index {
+    margin-bottom: 1.55rem;
+  }
+
+  .project-copy h3 {
+    font-size: clamp(2.1rem, 10vw, 3.2rem);
+  }
+
+  .project-description {
+    margin-top: 1.25rem;
+  }
+
+  .project-meta {
+    margin-top: 1.3rem;
   }
 
   .split-section,

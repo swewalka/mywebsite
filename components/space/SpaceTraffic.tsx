@@ -78,6 +78,7 @@ export function SpaceTraffic() {
 
   useEffect(() => {
     const hero = document.getElementById("top");
+    const work = document.getElementById("work");
     if (!hero) return;
 
     let frameId: number | null = null;
@@ -86,7 +87,12 @@ export function SpaceTraffic() {
       frameId = null;
       const heroBottom = hero.getBoundingClientRect().bottom;
       const nebulaFadeHeight = Math.min(window.innerHeight * 0.34, 360);
-      const opacity = Math.max(0, Math.min(1, 1 - heroBottom / nebulaFadeHeight));
+      const heroOpacity = Math.max(0, Math.min(1, 1 - heroBottom / nebulaFadeHeight));
+      const workBounds = work?.getBoundingClientRect();
+      const workIsVisible = workBounds
+        ? workBounds.top < window.innerHeight * 0.86 && workBounds.bottom > window.innerHeight * 0.14
+        : false;
+      const opacity = heroOpacity * (workIsVisible ? 0.08 : 1);
       setTrafficOpacity(opacity);
     };
 

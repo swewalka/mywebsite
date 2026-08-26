@@ -58,8 +58,8 @@ export function HeroArtwork() {
         <motion.img
           className="hero-planet"
           src={withBasePath(heroAssets.planet)}
-          width="420"
-          height="420"
+          width="1100"
+          height="1100"
           alt=""
           fetchPriority="high"
           decoding="async"
