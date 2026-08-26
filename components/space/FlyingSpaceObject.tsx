@@ -51,9 +51,6 @@ export function FlyingSpaceObject({
         times: [0, 0.52, 1],
       }}
       onAnimationComplete={onComplete}
-      style={{
-        filter: `brightness(${flight.brightness}) saturate(0.72) contrast(0.94) blur(${flight.blur}px)`,
-      }}
     >
       <motion.div
         className="flying-object-drift"
@@ -69,8 +66,24 @@ export function FlyingSpaceObject({
           alt=""
           decoding="async"
           unoptimized
-          style={{ width: flight.width, height: flight.width }}
+          style={{
+            width: flight.width,
+            height: flight.width,
+            filter: `brightness(${flight.brightness}) saturate(0.72) contrast(0.94) blur(${flight.blur}px)`,
+          }}
         />
+        <span
+          className="satellite-beacon"
+          style={{
+            left: `${flight.asset.beacon.x}%`,
+            top: `${flight.asset.beacon.y}%`,
+            animationDelay: `${flight.asset.beacon.delay}s`,
+          }}
+        >
+          <span className="satellite-beacon-bloom" />
+          <span className="satellite-beacon-core" />
+          <span className="satellite-beacon-halo" />
+        </span>
       </motion.div>
     </motion.div>
   );

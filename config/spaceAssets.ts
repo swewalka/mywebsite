@@ -10,6 +10,11 @@ export type SpaceAsset = {
   duration: readonly [number, number];
   brightness: readonly [number, number];
   baseWidth: number;
+  beacon: {
+    x: number;
+    y: number;
+    delay: number;
+  };
 };
 
 // Register a new optimized satellite here and it becomes available to SpaceTraffic.
@@ -20,10 +25,11 @@ export const trafficAssets: readonly SpaceAsset[] = [
     sourcePath: "assets/satellite-1.png",
     type: "satellite",
     weight: 3,
-    scale: [0.25, 0.38],
-    duration: [27, 44],
-    brightness: [0.58, 0.76],
+    scale: [0.14, 0.22],
+    duration: [38, 58],
+    brightness: [0.44, 0.6],
     baseWidth: 520,
+    beacon: { x: 86.7, y: 17.2, delay: -1.4 },
   },
   {
     id: "satellite-two",
@@ -31,10 +37,11 @@ export const trafficAssets: readonly SpaceAsset[] = [
     sourcePath: "assets/satellite-2.png",
     type: "satellite",
     weight: 3,
-    scale: [0.25, 0.38],
-    duration: [27, 44],
-    brightness: [0.58, 0.76],
+    scale: [0.14, 0.22],
+    duration: [38, 58],
+    brightness: [0.44, 0.6],
     baseWidth: 520,
+    beacon: { x: 74.7, y: 12.1, delay: -3.8 },
   },
 ];
 

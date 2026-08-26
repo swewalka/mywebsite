@@ -47,7 +47,7 @@ export function HeroArtwork() {
         alt=""
         decoding="async"
         initial={false}
-        animate={{ opacity: 0.24 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1.2 }}
       />
       <span className="artwork-axis artwork-axis-horizontal" />
@@ -65,7 +65,7 @@ export function HeroArtwork() {
           decoding="async"
           style={{ x: springX, y: springY }}
           initial={false}
-          animate={{ opacity: 0.88, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.25 }}
         />
       </div>
@@ -79,7 +79,7 @@ export function HeroArtwork() {
           decoding="async"
           style={{ x: springX, y: springY }}
           initial={false}
-          animate={{ opacity: 0.78, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.45 }}
         />
       </div>

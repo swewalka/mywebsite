@@ -87,19 +87,13 @@ export function SpaceTraffic() {
 
     const schedule = (initial: boolean) => {
       const delaySeconds = initial
-        ? between(isMobile ? 14 : 8, isMobile ? 25 : 18)
-        : between(isMobile ? 24 : 15, isMobile ? 48 : 40);
+        ? between(isMobile ? 8 : 6, isMobile ? 14 : 12)
+        : between(isMobile ? 26 : 18, isMobile ? 46 : 32);
 
       timerRef.current = setTimeout(() => {
         if (cancelled) return;
-
-        const shouldSpawn = initial || Math.random() < (isMobile ? 0.48 : 0.68);
-        if (shouldSpawn) {
-          nextId.current += 1;
-          setFlight(createFlight(nextId.current, isMobile));
-        } else {
-          schedule(false);
-        }
+        nextId.current += 1;
+        setFlight(createFlight(nextId.current, isMobile));
       }, delaySeconds * 1000);
     };
 
@@ -117,19 +111,11 @@ export function SpaceTraffic() {
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
     clearTimer();
 
-    const attemptSpawn = () => {
-      const delay = between(isMobile ? 24 : 15, isMobile ? 48 : 40) * 1000;
-      timerRef.current = setTimeout(() => {
-        if (Math.random() < (isMobile ? 0.48 : 0.68)) {
-          nextId.current += 1;
-          setFlight(createFlight(nextId.current, isMobile));
-        } else {
-          attemptSpawn();
-        }
-      }, delay);
-    };
-
-    attemptSpawn();
+    const delay = between(isMobile ? 26 : 18, isMobile ? 46 : 32) * 1000;
+    timerRef.current = setTimeout(() => {
+      nextId.current += 1;
+      setFlight(createFlight(nextId.current, isMobile));
+    }, delay);
   };
 
   return flight ? (
