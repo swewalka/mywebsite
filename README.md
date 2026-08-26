@@ -27,7 +27,7 @@ All owner-editable copy, projects, capabilities, contact details, navigation, an
 
 Update these placeholders before publishing:
 
-- `Alex Morgan`, `AM`, and the location
+- `Simon Wewalka`, `SW`, and the location
 - `hello@example.com`
 - the three starter project descriptions and links
 - GitHub and LinkedIn URLs

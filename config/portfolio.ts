@@ -8,12 +8,12 @@ export type Project = {
 };
 
 export const portfolio = {
-  name: "Alex Morgan",
-  monogram: "AM",
+  name: "Simon Wewalka",
+  monogram: "SW",
   location: "Vienna, Austria",
   role: "Engineering · Software · Product",
   metadata: {
-    title: "Alex Morgan — Engineering, Software & Product",
+    title: "Simon Wewalka — Engineering, Software & Product",
     description:
       "Mechanical engineering student working across technology, product development, and ambitious side projects.",
   },

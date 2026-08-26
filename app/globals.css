@@ -827,9 +827,46 @@ button {
   align-items: start;
 }
 
+.about-portrait {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 440px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--elevated);
+}
+
+.about-portrait::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(238, 232, 220, 0.08);
+  content: "";
+  pointer-events: none;
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+  }
+
+  .about-content .focus-list {
+    margin-top: auto;
+  }
+}
+
 .about-content > p {
   max-width: 680px;
-  margin: 0;
+  margin: clamp(2.25rem, 4vw, 3.5rem) 0 0;
   color: #c8c9c7;
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   letter-spacing: -0.025em;
@@ -1344,6 +1381,10 @@ button {
   .skills-intro {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .about-portrait {
+    max-width: 520px;
   }
 
   .focus-list {
