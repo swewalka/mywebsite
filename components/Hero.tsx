@@ -1,7 +1,6 @@
 import { portfolio } from "@/config/portfolio";
 import { Arrow } from "@/components/ui/Arrow";
 import { HeroArtwork } from "@/components/space/HeroArtwork";
-import { SpaceTraffic } from "@/components/space/SpaceTraffic";
 
 export function Hero() {
   return (
@@ -25,10 +24,10 @@ export function Hero() {
         </div>
       </div>
       <HeroArtwork />
-      <SpaceTraffic />
       <div className="hero-index" aria-hidden="true">
-        <span>47.3769° N</span>
-        <span>16° / 02°</span>
+        <span>47.3769° N · 16.1550° E</span>
+        <span className="hero-index-line" />
+        <span>Vienna / AT</span>
       </div>
     </section>
   );

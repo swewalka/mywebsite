@@ -46,10 +46,14 @@ export function HeroArtwork() {
         height="820"
         alt=""
         decoding="async"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
+        initial={false}
+        animate={{ opacity: 0.24 }}
         transition={{ duration: 1.2 }}
       />
+      <span className="artwork-axis artwork-axis-horizontal" />
+      <span className="artwork-axis artwork-axis-vertical" />
+      <span className="artwork-orbit artwork-orbit-outer" />
+      <span className="artwork-orbit artwork-orbit-inner" />
       <div className="hero-planet-wrap">
         <motion.img
           className="hero-planet"
@@ -60,8 +64,8 @@ export function HeroArtwork() {
           fetchPriority="high"
           decoding="async"
           style={{ x: springX, y: springY }}
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 0.76, scale: 1 }}
+          initial={false}
+          animate={{ opacity: 0.88, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.25 }}
         />
       </div>
@@ -74,14 +78,14 @@ export function HeroArtwork() {
           alt=""
           decoding="async"
           style={{ x: springX, y: springY }}
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 0.72, scale: 1 }}
+          initial={false}
+          animate={{ opacity: 0.78, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.45 }}
         />
       </div>
       <LaunchRocket />
-      <span className="artwork-orbit" />
-      <span className="artwork-caption">ASSEMBLED / PAPER STUDY 02</span>
+      <span className="artwork-marker artwork-marker-one" />
+      <span className="artwork-marker artwork-marker-two" />
     </div>
   );
 }
