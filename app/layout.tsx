@@ -4,10 +4,12 @@ import { portfolio } from "@/config/portfolio";
 import { withBasePath } from "@/config/paths";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://swewalka.github.io/mywebsite";
+
 export const metadata: Metadata = {
   title: portfolio.metadata.title,
   description: portfolio.metadata.description,
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: portfolio.metadata.title,
     description: portfolio.metadata.description,

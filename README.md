@@ -59,7 +59,7 @@ Register additional satellite flyby artwork in `config/spaceAssets.ts`. Each ent
 The included workflow in `.github/workflows/deploy.yml` builds and deploys on pushes to `main`.
 
 1. Push the repository to GitHub.
-2. In **Settings → Pages**, choose **GitHub Actions** as the source.
+2. In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. Do not select `main` or `/(root)`; that publishes the repository files instead of the compiled Next.js site.
 3. Push to `main` or run the workflow manually.
 
 The workflow automatically sets the correct base path:
@@ -70,7 +70,9 @@ The workflow automatically sets the correct base path:
 For a manual repository-subpath build, run:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/repository-name npm run build
+NEXT_PUBLIC_BASE_PATH=/repository-name \
+NEXT_PUBLIC_SITE_URL=https://username.github.io/repository-name \
+npm run build
 ```
 
 All public artwork and favicon references pass through `config/paths.ts`, so changing the base path does not require component edits.
