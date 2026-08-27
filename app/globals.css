@@ -843,6 +843,23 @@ button {
   text-transform: uppercase;
 }
 
+.project-status {
+  display: inline-block;
+  margin: 1rem 0 0;
+  border: 1px solid rgba(220, 138, 96, 0.48);
+  border-radius: 999px;
+  padding: 0.42rem 0.68rem;
+  background: rgba(199, 107, 66, 0.1);
+  color: #e8a47f;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .project-copy h3 {
   margin: 0;
   color: #e4e2dc;
@@ -991,68 +1008,6 @@ button {
 
 .focus-list li {
   color: #aeb6c0;
-  font-size: 0.9rem;
-}
-
-/* Skills */
-.skills-intro {
-  display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
-  gap: 3rem;
-  align-items: end;
-}
-
-.skills-intro > p {
-  max-width: 330px;
-  margin: 0 0 0.25rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.skill-group {
-  position: relative;
-  min-height: 300px;
-  padding: 2rem 2.5rem 2.5rem 0;
-}
-
-.skill-group + .skill-group {
-  padding-left: 2.5rem;
-  border-left: 1px solid var(--line);
-}
-
-.skill-index {
-  color: var(--copper);
-  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-}
-
-.skill-group h3 {
-  margin: 1.7rem 0 1.5rem;
-  color: #dddcd7;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-}
-
-.skill-group ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.skill-group li {
-  padding-block: 0.42rem;
-  color: var(--muted);
   font-size: 0.9rem;
 }
 
@@ -1508,8 +1463,7 @@ button {
     margin-top: 1.25rem;
   }
 
-  .split-section,
-  .skills-intro {
+  .split-section {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
@@ -1521,21 +1475,6 @@ button {
   .focus-list {
     grid-template-columns: 1fr;
     gap: 1.2rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .skill-group {
-    min-height: 0;
-    padding: 2rem 0 2.25rem;
-  }
-
-  .skill-group + .skill-group {
-    padding-left: 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
   }
 
   .contact-section h2 {

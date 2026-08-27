@@ -2,17 +2,25 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { portfolio } from "@/config/portfolio";
 import { withBasePath } from "@/config/paths";
+import { siteUrl } from "@/config/site";
 import "./globals.css";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://swewalka.github.io/mywebsite";
 
 export const metadata: Metadata = {
   title: portfolio.metadata.title,
   description: portfolio.metadata.description,
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: portfolio.metadata.title,
     description: portfolio.metadata.description,
+    url: "/",
+    siteName: portfolio.name,
     type: "website",
     locale: "en_US",
     images: [
@@ -23,6 +31,12 @@ export const metadata: Metadata = {
         alt: "Handcrafted paper rocket",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: portfolio.metadata.title,
+    description: portfolio.metadata.description,
+    images: [withBasePath("/assets/optimized/launch-rocket.webp")],
   },
   icons: {
     icon: withBasePath("/favicon.svg"),

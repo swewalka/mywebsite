@@ -21,14 +21,14 @@ function getProjectLinks(project: Project): ProjectLink[] {
     project.projectUrl
       ? {
           href: project.projectUrl,
-          label: "View project",
+          label: "Visit project",
           accessibleLabel: `View ${project.title}`,
         }
       : null,
     project.githubUrl
       ? {
           href: project.githubUrl,
-          label: "View project",
+          label: "View on GitHub",
           accessibleLabel: `View ${project.title} on GitHub`,
         }
       : null,
@@ -64,11 +64,18 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </p>
         <h3>{project.title}</h3>
+        {project.status ? <p className="project-status">{project.status}</p> : null}
         <p className="project-description">{project.description}</p>
         {links.length > 0 ? (
           <div className="project-links">
             {links.map((link) => (
-              <a key={link.label} href={link.href} aria-label={link.accessibleLabel}>
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.accessibleLabel} (opens in a new tab)`}
+              >
                 {link.label}
                 <span aria-hidden="true">↗</span>
               </a>

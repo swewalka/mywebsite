@@ -25,7 +25,7 @@ export function Hero() {
       </div>
       <HeroArtwork />
       <div className="hero-index" aria-hidden="true">
-        <span>47.3769° N · 16.1550° E</span>
+        <span>48.2082° N · 16.3738° E</span>
         <span className="hero-index-line" />
         <span>Vienna / AT</span>
       </div>

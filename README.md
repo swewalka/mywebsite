@@ -1,77 +1,12 @@
-# Handcrafted Space Portfolio
+# Simon Wewalka — Portfolio
 
-A concise, static personal portfolio built with Next.js App Router, TypeScript, Tailwind CSS, and Motion. The interface is deliberately precise and editorial; the supplied paper artwork carries the expressive visual identity.
-
-## Run locally
+Source for [simonwewalka.at](https://simonwewalka.at), a static personal
+portfolio built with Next.js, TypeScript, Tailwind CSS, and Motion.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-Production checks:
-
-```bash
-npm run typecheck
-npm run lint
-npm run build
-```
-
-The static site is exported to `out/`.
-
-## Customize the portfolio
-
-All owner-editable copy, projects, capabilities, contact details, navigation, and social links live in `config/portfolio.ts`.
-
-The Skills section is currently hidden from both the page and navigation. Its component and content remain in `components/Skills.tsx` and `config/portfolio.ts`; restore the import and `<Skills />` in `app/page.tsx`, then add its `#skills` link back to the navigation array when it is ready to publish.
-
-Update these placeholders before publishing:
-
-- `Simon Wewalka`, `SW`, and the location
-- `hello@example.com`
-- the three starter project descriptions and links
-- GitHub and LinkedIn URLs
-- the canonical `metadataBase` URL in `app/layout.tsx`
-
-## Artwork and space traffic
-
-The source artwork remains unchanged in `assets/`. Smaller transparent WebP derivatives in `public/assets/optimized/` reduce initial transfer size while retaining the paper texture.
-
-Asset inventory:
-
-| Files | Category | Initial use |
-| --- | --- | --- |
-| `rocket-1.png`, `rocket-2.png` | Rockets | Reserved variants |
-| `Rocket/rocket.png`, `Rocket/propulsion-*.png` | Launch rocket and flame frames | Intro launch sequence |
-| `satellite-1.png`, `satellite-2.png` | Satellites | Flyby traffic |
-| `planet-1.png`, `planet-2.png` | Planets / moon | Launch origin and orbital destination |
-| `meterioide-1.png` | Meteor | Reserved variant |
-| `nebula-1.png` | Layered cloud / smoke | Subtle hero depth layer |
-
-The original scene assets and launch rocket are 1254×1254 8-bit RGBA PNGs. The five transparent propulsion frames are 1086×1448 PNGs.
-
-Register additional satellite flyby artwork in `config/spaceAssets.ts`. Each entry controls its scale, duration, brightness, and base render size. Independent `SpaceTraffic` layers live inside the About and Contact sections, start when their section approaches the viewport, and travel with that section as the page scrolls. Each layer keeps at most one satellite mounted, uses smooth curved trajectories with a slow rotational drift, and disables itself for reduced-motion users. The intro rocket is assembled from a separate body and five propulsion frames in `LaunchRocket.tsx`; its path and scale remain smooth while only the flame artwork flickers.
-
-## GitHub Pages
-
-The included workflow in `.github/workflows/deploy.yml` builds and deploys on pushes to `main`.
-
-1. Push the repository to GitHub.
-2. In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. Do not select `main` or `/(root)`; that publishes the repository files instead of the compiled Next.js site.
-3. Push to `main` or run the workflow manually.
-
-The deployment workflow builds for a custom domain hosted at its root, so it does
-not set a repository base path. Assets are emitted as `/assets/...` rather than
-`/repository-name/assets/...`.
-
-For a manual repository-subpath build without a custom domain, run:
-
-```bash
-NEXT_PUBLIC_BASE_PATH=/repository-name \
-NEXT_PUBLIC_SITE_URL=https://username.github.io/repository-name \
-npm run build
-```
-
-All public artwork and favicon references pass through `config/paths.ts`, so changing the base path does not require component edits.
+Run the complete production check with `npm run check`. Technical architecture,
+deployment, asset, and contributor guidance lives in `AGENTS.md`.

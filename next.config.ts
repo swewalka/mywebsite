@@ -8,18 +8,15 @@ const nextConfig: NextConfig = {
   agentRules: false,
   output: "export",
   trailingSlash: true,
+  // Prevent an unrelated parent-directory lockfile from changing the project root.
   outputFileTracingRoot: process.cwd(),
   basePath,
   assetPrefix: basePath || undefined,
   images: {
     unoptimized: true,
   },
-  // `npm run build` performs strict type checking before Next compiles.
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   experimental: {
-    // Use the compiler API; npm 12 writes lifecycle notices into CLI output.
+    // npm lifecycle notices can make Next's TypeScript CLI output unparsable.
     useTypeScriptCli: false,
   },
 };

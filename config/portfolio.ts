@@ -7,6 +7,7 @@ export type Project = {
   projectUrl?: string;
   githubUrl?: string;
   caseStudyUrl?: string;
+  status?: string;
 };
 
 export const portfolio = {
@@ -34,26 +35,27 @@ export const portfolio = {
   },
   projects: [
     {
+      id: "eduplanner",
+      title: "EduPlanner",
+      description:
+        "EduPlanner is the biggest project I have worked on so far. Over two years, I helped develop the platform to support students and teachers in schools with open learning systems. It is still used at TGM, one of Vienna’s largest schools, but the project is now being wound down because the market proved too small. Along the way, I learned a great deal about building a real product, working with users, and entrepreneurship.",
+      planet: "/assets/optimized/planet-3.webp",
+      planetSize: "large",
+      projectUrl: "https://eduplanner.pallasys.at/",
+    },
+    {
       id: "first-model-rocket",
       title: "First Model Rocket",
       description:
         "I built this model rocket with three other students and took on the role of team captain. It was our FIRST project, the introductory rocket-building project completed by new members of the TU Wien Space Team.",
-      planet: "/assets/optimized/planet-3.webp",
-      planetSize: "large",
-      githubUrl: "https://github.com/swewalka/FIRST-Space-Team-project",
-    },
-    {
-      id: "eduplanner",
-      title: "EduPlanner",
-      description:
-        "EduPlanner is the biggest project I have worked on so far. Over two years, I helped develop the platform to support students and teachers in schools with open learning systems. It is still used at Vienna’s largest school, but the project is now being wound down because the market proved too small. Along the way, I learned a great deal about building a real product, working with users, and entrepreneurship.",
       planet: "/assets/optimized/planet-4.webp",
       planetSize: "medium",
-      projectUrl: "https://eduplanner.pallasys.at/",
+      githubUrl: "https://github.com/swewalka/FIRST-Space-Team-project",
     },
     {
       id: "portable-wind-station",
       title: "Portable Wind Station",
+      status: "In development",
       description:
         "A personal project born from my love of kitesurfing. I’m developing a partly 3D printable, self-sufficient wind station for live wind measurements that can be placed at the beach or mounted on a car.",
       planet: "/assets/optimized/planet-6.webp",
@@ -71,24 +73,6 @@ export const portfolio = {
       "FPV and making",
     ],
   },
-  skills: {
-    eyebrow: "Capabilities",
-    intro: "A cross-disciplinary toolkit for taking ideas from first principles to working prototypes.",
-    groups: [
-      {
-        name: "Engineering",
-        items: ["CAD", "Mechanical design", "Prototyping", "Testing"],
-      },
-      {
-        name: "Software",
-        items: ["TypeScript", "Python", "React / Next.js", "Linux"],
-      },
-      {
-        name: "Product",
-        items: ["Product strategy", "Interaction design", "Rapid validation", "Project leadership"],
-      },
-    ],
-  },
   contact: {
     eyebrow: "Contact",
     prompt: "Want to work together?",
@@ -99,5 +83,4 @@ export const portfolio = {
       { label: "LinkedIn", href: "https://www.linkedin.com/in/simon-wewalka-3ba327338/" },
     ],
   },
-  year: "2026",
 } as const;

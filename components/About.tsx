@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { portfolio } from "@/config/portfolio";
+import { withBasePath } from "@/config/paths";
 import { Reveal } from "@/components/ui/Reveal";
 import { SpaceTraffic } from "@/components/space/SpaceTraffic";
-import profilePhoto from "@/assets/Bewerbungsfoto_compressed.jpg";
 
 export function About() {
   return (
@@ -11,8 +11,10 @@ export function About() {
       <Reveal className="split-section">
         <figure className="about-portrait">
           <Image
-            src={profilePhoto}
+            src={withBasePath("/assets/optimized/profile.webp")}
             alt={`Portrait of ${portfolio.name}`}
+            width={1000}
+            height={1500}
             sizes="(max-width: 767px) calc(100vw - 48px), 36vw"
           />
         </figure>

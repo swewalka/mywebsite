@@ -34,10 +34,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static site
-        run: npm run build
+      - name: Check and build static site
+        run: npm run check
         env:
-          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_SITE_URL: https://simonwewalka.at
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
