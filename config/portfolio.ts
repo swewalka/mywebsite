@@ -91,12 +91,12 @@ export const portfolio = {
   },
   contact: {
     eyebrow: "Contact",
-    prompt: "Have an interesting project?",
+    prompt: "Want to work together?",
     cta: "Let’s talk.",
-    email: "hello@example.com",
+    email: "contact@simonwewalka.at",
     links: [
-      { label: "GitHub", href: "https://github.com/" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/" },
+      { label: "GitHub", href: "https://github.com/swewalka" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/simon-wewalka-3ba327338/" },
     ],
   },
   year: "2026",
