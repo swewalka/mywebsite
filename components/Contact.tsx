@@ -1,10 +1,12 @@
 import { portfolio } from "@/config/portfolio";
 import { Arrow } from "@/components/ui/Arrow";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpaceTraffic } from "@/components/space/SpaceTraffic";
 
 export function Contact() {
   return (
     <section id="contact" className="contact-section site-container" aria-labelledby="contact-heading">
+      <SpaceTraffic zone="contact" />
       <Reveal>
         <p className="eyebrow">{portfolio.contact.eyebrow}</p>
         <p className="contact-prompt">{portfolio.contact.prompt}</p>

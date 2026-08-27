@@ -69,7 +69,7 @@ export function FlyingSpaceObject({
           style={{
             width: flight.width,
             height: flight.width,
-            filter: `brightness(${flight.brightness}) saturate(0.72) contrast(0.94) blur(${flight.blur}px)`,
+            filter: `brightness(${flight.brightness}) saturate(0.78) contrast(0.96) blur(${flight.blur}px)`,
           }}
         />
         <span

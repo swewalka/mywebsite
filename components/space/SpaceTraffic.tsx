@@ -5,12 +5,18 @@ import { useReducedMotion } from "motion/react";
 import { trafficAssets, type SpaceAsset } from "@/config/spaceAssets";
 import { FlyingSpaceObject, type Flight, type FlightPath } from "./FlyingSpaceObject";
 
-const paths: readonly FlightPath[] = [
-  { x: [-28, 48, 118], y: [82, 42, -24], rotation: [40, 43, 41] },
-  { x: [-28, 44, 118], y: [18, 30, 72], rotation: [126, 129, 127] },
-  { x: [118, 46, -30], y: [20, 46, 70], rotation: [-133, -130, -132] },
-  { x: [-26, 52, 118], y: [66, 52, 22], rotation: [63, 60, 62] },
-];
+type TrafficZone = "about" | "contact";
+
+const paths: Record<TrafficZone, readonly FlightPath[]> = {
+  about: [
+    { x: [-18, 48, 112], y: [50, 24, -8], rotation: [40, 43, 41] },
+    { x: [112, 48, -20], y: [-8, 22, 50], rotation: [-133, -130, -132] },
+  ],
+  contact: [
+    { x: [-18, 50, 112], y: [46, 28, 8], rotation: [63, 60, 62] },
+    { x: [112, 48, -20], y: [8, 26, 46], rotation: [-133, -130, -132] },
+  ],
+};
 
 function between(min: number, max: number): number {
   return min + Math.random() * (max - min);
@@ -24,15 +30,19 @@ function reversePath(path: FlightPath): FlightPath {
   };
 }
 
-function choosePath(): FlightPath {
-  const path = paths[Math.floor(Math.random() * paths.length)];
+function choosePath(zone: TrafficZone): FlightPath {
+  const zonePaths = paths[zone];
+  const path = zonePaths[Math.floor(Math.random() * zonePaths.length)];
   const shouldTravelRight = Math.random() < 0.5;
   const travelsRight = path.x[2] > path.x[0];
 
   return shouldTravelRight === travelsRight ? path : reversePath(path);
 }
 
-function chooseWeightedAsset(): SpaceAsset {
+function chooseAsset(zone: TrafficZone): SpaceAsset {
+  const zoneAsset = trafficAssets[zone === "about" ? 0 : 1];
+  if (zoneAsset) return zoneAsset;
+
   const totalWeight = trafficAssets.reduce((sum, asset) => sum + asset.weight, 0);
   let point = Math.random() * totalWeight;
 
@@ -44,10 +54,10 @@ function chooseWeightedAsset(): SpaceAsset {
   return trafficAssets[trafficAssets.length - 1];
 }
 
-function createFlight(id: number, isMobile: boolean): Flight {
-  const asset = chooseWeightedAsset();
+function createFlight(id: number, isMobile: boolean, zone: TrafficZone): Flight {
+  const asset = chooseAsset(zone);
   const scale = between(...asset.scale) * (isMobile ? 0.72 : 1);
-  const path = choosePath();
+  const path = choosePath(zone);
   const driftDirection = Math.random() < 0.5 ? -1 : 1;
 
   return {
@@ -57,15 +67,16 @@ function createFlight(id: number, isMobile: boolean): Flight {
     duration: between(...asset.duration) * (isMobile ? 1.12 : 1),
     width: Math.round(asset.baseWidth * scale),
     brightness: between(...asset.brightness),
-    blur: between(0, 0.8),
+    blur: between(0, 0.55),
     rotationDrift: driftDirection * between(30, 56),
   };
 }
 
-export function SpaceTraffic() {
+export function SpaceTraffic({ zone }: { zone: TrafficZone }) {
   const reduceMotion = useReducedMotion();
-  const [trafficOpacity, setTrafficOpacity] = useState(0);
+  const [isNearby, setIsNearby] = useState(false);
   const [flight, setFlight] = useState<Flight | null>(null);
+  const layerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nextId = useRef(0);
 
@@ -77,43 +88,20 @@ export function SpaceTraffic() {
   }, []);
 
   useEffect(() => {
-    const hero = document.getElementById("top");
-    const work = document.getElementById("work");
-    if (!hero) return;
+    const layer = layerRef.current;
+    if (!layer) return;
 
-    let frameId: number | null = null;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearby(entry.isIntersecting),
+      { rootMargin: "35% 0px" },
+    );
+    observer.observe(layer);
 
-    const updateOpacity = () => {
-      frameId = null;
-      const heroBottom = hero.getBoundingClientRect().bottom;
-      const nebulaFadeHeight = Math.min(window.innerHeight * 0.34, 360);
-      const heroOpacity = Math.max(0, Math.min(1, 1 - heroBottom / nebulaFadeHeight));
-      const workBounds = work?.getBoundingClientRect();
-      const workIsVisible = workBounds
-        ? workBounds.top < window.innerHeight * 0.86 && workBounds.bottom > window.innerHeight * 0.14
-        : false;
-      const opacity = heroOpacity * (workIsVisible ? 0.08 : 1);
-      setTrafficOpacity(opacity);
-    };
-
-    const requestUpdate = () => {
-      if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(updateOpacity);
-    };
-
-    updateOpacity();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (reduceMotion) {
+    if (reduceMotion || !isNearby) {
       clearTimer();
       timerRef.current = setTimeout(() => setFlight(null), 0);
       return clearTimer;
@@ -124,13 +112,13 @@ export function SpaceTraffic() {
 
     const schedule = (initial: boolean) => {
       const delaySeconds = initial
-        ? between(isMobile ? 8 : 6, isMobile ? 14 : 12)
-        : between(isMobile ? 26 : 18, isMobile ? 46 : 32);
+        ? between(0.2, 1.2)
+        : between(isMobile ? 18 : 12, isMobile ? 30 : 22);
 
       timerRef.current = setTimeout(() => {
         if (cancelled) return;
         nextId.current += 1;
-        setFlight(createFlight(nextId.current, isMobile));
+        setFlight(createFlight(nextId.current, isMobile, zone));
       }, delaySeconds * 1000);
     };
 
@@ -139,25 +127,27 @@ export function SpaceTraffic() {
       cancelled = true;
       clearTimer();
     };
-  }, [clearTimer, reduceMotion]);
+  }, [clearTimer, isNearby, reduceMotion, zone]);
 
   const handleComplete = () => {
     setFlight(null);
-    if (reduceMotion) return;
+    if (reduceMotion || !isNearby) return;
 
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
     clearTimer();
 
-    const delay = between(isMobile ? 26 : 18, isMobile ? 46 : 32) * 1000;
+    const delay = between(isMobile ? 18 : 12, isMobile ? 30 : 22) * 1000;
     timerRef.current = setTimeout(() => {
       nextId.current += 1;
-      setFlight(createFlight(nextId.current, isMobile));
+      setFlight(createFlight(nextId.current, isMobile, zone));
     }, delay);
   };
 
-  return flight ? (
-    <div className="space-traffic-layer" style={{ opacity: trafficOpacity }}>
-      <FlyingSpaceObject key={flight.id} flight={flight} onComplete={handleComplete} />
+  return (
+    <div ref={layerRef} className={`space-traffic-layer space-traffic-layer--${zone}`}>
+      {flight ? (
+        <FlyingSpaceObject key={flight.id} flight={flight} onComplete={handleComplete} />
+      ) : null}
     </div>
-  ) : null;
+  );
 }

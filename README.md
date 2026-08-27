@@ -52,7 +52,7 @@ Asset inventory:
 
 The original scene assets and launch rocket are 1254×1254 8-bit RGBA PNGs. The five transparent propulsion frames are 1086×1448 PNGs.
 
-Register additional satellite flyby artwork in `config/spaceAssets.ts`. Each entry controls its weighted rarity, scale, duration, brightness, and base render size; no new React component is needed. `SpaceTraffic` waits 8–18 seconds before the first pass, then considers another pass roughly every 15–40 seconds. It keeps at most one satellite mounted, art-directs several smooth curved trajectories with a slow rotational drift, uses quieter mobile timings, and disables itself for reduced-motion users. The intro rocket is assembled from a separate body and five propulsion frames in `LaunchRocket.tsx`; its path and scale remain smooth while only the flame artwork flickers.
+Register additional satellite flyby artwork in `config/spaceAssets.ts`. Each entry controls its scale, duration, brightness, and base render size. Independent `SpaceTraffic` layers live inside the About and Contact sections, start when their section approaches the viewport, and travel with that section as the page scrolls. Each layer keeps at most one satellite mounted, uses smooth curved trajectories with a slow rotational drift, and disables itself for reduced-motion users. The intro rocket is assembled from a separate body and five propulsion frames in `LaunchRocket.tsx`; its path and scale remain smooth while only the flame artwork flickers.
 
 ## GitHub Pages
 

@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { portfolio } from "@/config/portfolio";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpaceTraffic } from "@/components/space/SpaceTraffic";
 import profilePhoto from "@/assets/Bewerbungsfoto_compressed.jpg";
 
 export function About() {
   return (
     <section id="about" className="section site-container" aria-labelledby="about-heading">
+      <SpaceTraffic zone="about" />
       <Reveal className="split-section">
         <figure className="about-portrait">
           <Image
