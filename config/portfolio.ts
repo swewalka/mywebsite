@@ -2,8 +2,6 @@ export type Project = {
   id: string;
   title: string;
   description: string;
-  tags: string[];
-  year?: string;
   planet: string;
   planetSize: "medium" | "large" | "wide";
   projectUrl?: string;
@@ -17,7 +15,7 @@ export const portfolio = {
   location: "Vienna, Austria",
   role: "Engineering · Software · Product",
   metadata: {
-    title: "Simon Wewalka — Engineering, Software & Product",
+    title: "Simon Wewalka",
     description:
       "Mechanical engineering student working across technology, product development, and ambitious side projects.",
   },
@@ -27,57 +25,50 @@ export const portfolio = {
     { label: "Contact", href: "#contact" },
   ],
   hero: {
-    eyebrow: "Engineering · Software · Product",
-    title: ["Building things", "between engineering", "and software."],
+    eyebrow: "Student · Engineer · Maker",
+    title: ["Building things", "with space", "in mind."],
     description:
-      "Mechanical engineering student working across technology, product development and ambitious side projects.",
+      "I’m Simon, a mechanical engineering student interested in space, machines, and making useful things.",
     primaryCta: { label: "View selected work", href: "#work" },
-    secondaryCta: { label: "About me", href: "#about" },
+    secondaryCta: { label: "Contact", href: "#contact" },
   },
   projects: [
     {
-      id: "flight-control-workspace",
-      title: "Flight Control Workspace",
+      id: "first-model-rocket",
+      title: "First Model Rocket",
       description:
-        "A focused desktop environment for reviewing FPV footage, telemetry and flight data without breaking creative flow.",
-      tags: ["Product", "TypeScript", "Systems"],
-      year: "2026",
+        "I built this model rocket with three other students and took on the role of team captain. It was our FIRST project, the introductory rocket-building project completed by new members of the TU Wien Space Team.",
       planet: "/assets/optimized/planet-3.webp",
       planetSize: "large",
-      projectUrl: "#contact",
+      githubUrl: "https://github.com/swewalka/FIRST-Space-Team-project",
     },
     {
-      id: "instrumented-test-rig",
-      title: "Instrumented Test Rig",
+      id: "eduplanner",
+      title: "EduPlanner",
       description:
-        "A modular hardware and software platform for repeatable mechanical testing, live measurement and rapid iteration.",
-      tags: ["Engineering", "Prototyping", "Python"],
-      year: "2025",
+        "EduPlanner is the biggest project I have worked on so far. Over two years, I helped develop the platform to support students and teachers in schools with open learning systems. It is still used at Vienna’s largest school, but the project is now being wound down because the market proved too small. Along the way, I learned a great deal about building a real product, working with users, and entrepreneurship.",
       planet: "/assets/optimized/planet-4.webp",
       planetSize: "medium",
-      projectUrl: "#contact",
+      projectUrl: "https://eduplanner.pallasys.at/",
     },
     {
-      id: "orbital-systems-study",
-      title: "Orbital Systems Study",
+      id: "portable-wind-station",
+      title: "Portable Wind Station",
       description:
-        "An independent exploration of mission constraints, subsystem trade-offs and clear technical communication.",
-      tags: ["Aerospace", "Research", "Design"],
-      year: "2025",
+        "A personal project born from my love of kitesurfing. I’m developing a partly 3D printable, self-sufficient wind station for live wind measurements that can be placed at the beach or mounted on a car.",
       planet: "/assets/optimized/planet-6.webp",
       planetSize: "wide",
-      projectUrl: "#contact",
     },
   ] satisfies Project[],
   about: {
     eyebrow: "About",
     body:
-      "I’m a mechanical engineering student who likes working where physical systems, useful software and thoughtful product decisions meet. I’m most engaged by practical problems that reward curiosity, disciplined iteration and a willingness to make things real.",
+      "I study mechanical engineering at TU Wien and am part of the TU Wien Space Team. Most of what interests me involves designing, testing, and improving real things, whether it’s a university project, a prototype, or something I’m making simply because I want to see if it works.",
     focus: [
       "Mechanical engineering",
-      "Software systems",
-      "Product development",
-      "Aerospace · FPV · Making",
+      "Designing and prototyping",
+      "Space-related projects",
+      "FPV and making",
     ],
   },
   skills: {

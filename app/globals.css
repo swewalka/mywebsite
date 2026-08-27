@@ -865,25 +865,6 @@ button {
   line-height: 1.72;
 }
 
-.project-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0;
-  margin: 1.55rem 0 0;
-  color: var(--muted-deep);
-  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.075em;
-  line-height: 1.6;
-  text-transform: uppercase;
-}
-
-.project-meta i {
-  margin-inline: 0.75rem;
-  color: rgba(238, 232, 220, 0.22);
-  font-style: normal;
-}
-
 .project-links {
   display: flex;
   flex-wrap: wrap;
@@ -1525,10 +1506,6 @@ button {
 
   .project-description {
     margin-top: 1.25rem;
-  }
-
-  .project-meta {
-    margin-top: 1.3rem;
   }
 
   .split-section,

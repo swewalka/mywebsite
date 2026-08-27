@@ -62,12 +62,11 @@ The included workflow in `.github/workflows/deploy.yml` builds and deploys on pu
 2. In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. Do not select `main` or `/(root)`; that publishes the repository files instead of the compiled Next.js site.
 3. Push to `main` or run the workflow manually.
 
-The workflow automatically sets the correct base path:
+The deployment workflow builds for a custom domain hosted at its root, so it does
+not set a repository base path. Assets are emitted as `/assets/...` rather than
+`/repository-name/assets/...`.
 
-- `https://username.github.io/`: no base path
-- `https://username.github.io/repository-name/`: `/repository-name`
-
-For a manual repository-subpath build, run:
+For a manual repository-subpath build without a custom domain, run:
 
 ```bash
 NEXT_PUBLIC_BASE_PATH=/repository-name \

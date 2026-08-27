@@ -28,7 +28,7 @@ function getProjectLinks(project: Project): ProjectLink[] {
     project.githubUrl
       ? {
           href: project.githubUrl,
-          label: "GitHub",
+          label: "View project",
           accessibleLabel: `View ${project.title} on GitHub`,
         }
       : null,
@@ -65,14 +65,6 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
         </p>
         <h3>{project.title}</h3>
         <p className="project-description">{project.description}</p>
-        <p className="project-meta">
-          {[...project.tags, project.year].filter(Boolean).map((item, itemIndex) => (
-            <span key={item}>
-              {itemIndex > 0 ? <i aria-hidden="true">·</i> : null}
-              {item}
-            </span>
-          ))}
-        </p>
         {links.length > 0 ? (
           <div className="project-links">
             {links.map((link) => (
