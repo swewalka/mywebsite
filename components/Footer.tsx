@@ -5,8 +5,11 @@ export function Footer() {
 
   return (
     <footer className="site-container footer">
-      <p>© {currentYear} {portfolio.name}</p>
-      <p>{portfolio.location}</p>
+      <div className="footer-meta">
+        <p>© {currentYear} {portfolio.name}</p>
+        <span aria-hidden="true">·</span>
+        <p>{portfolio.location}</p>
+      </div>
       <div className="footer-links">
         {portfolio.contact.links.map((link) => (
           <a

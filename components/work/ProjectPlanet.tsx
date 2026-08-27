@@ -24,7 +24,7 @@ export function ProjectPlanet({ project, projectIndex }: ProjectPlanetProps) {
       className={`project-planet-reveal project-planet-reveal--${project.planetSize}`}
       initial={{ opacity: 0, y: reduceMotion ? 0 : 18, scale: reduceMotion ? 1 : 0.97 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.28 }}
+      viewport={{ once: false, amount: 0.28 }}
       transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
       aria-hidden="true"
     >

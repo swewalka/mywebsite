@@ -4,14 +4,21 @@ import { ProjectEntry } from "@/components/work/ProjectEntry";
 
 export function Projects() {
   return (
-    <section className="section site-container" aria-labelledby="work-heading">
+    <section id="work" className="section site-container" aria-labelledby="work-heading">
       <Reveal>
-        <div id="work" className="section-heading work-heading">
+        <div className="section-heading work-heading">
           <p className="eyebrow">Selected work</p>
           <h2 id="work-heading">Projects, experiments and things I’ve built.</h2>
         </div>
       </Reveal>
-      <div className="project-list">
+      <p className="project-swipe-hint" aria-hidden="true">
+        Swipe to explore <span>←&nbsp;&nbsp;→</span>
+      </p>
+      <div
+        className="project-list"
+        role="region"
+        aria-label="Selected projects"
+      >
         {portfolio.projects.map((project, index) => (
           <ProjectEntry
             key={project.id}

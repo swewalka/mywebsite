@@ -48,7 +48,10 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
   const links = getProjectLinks(project);
 
   return (
-    <article className={`project-entry project-entry--${orientation}`}>
+    <article
+      className={`project-entry project-entry--${orientation}`}
+      aria-label={`Project ${index + 1} of ${total}: ${project.title}`}
+    >
       <div className="project-visual">
         <ProjectPlanet project={project} projectIndex={index} />
       </div>
@@ -57,7 +60,7 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
         className="project-copy"
         initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
+        viewport={{ once: false, amount: 0.35 }}
         transition={{ duration: 0.58, delay: reduceMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
       >
         <p className="project-index">

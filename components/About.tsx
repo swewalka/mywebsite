@@ -9,6 +9,10 @@ export function About() {
     <section id="about" className="section site-container" aria-labelledby="about-heading">
       <SpaceTraffic zone="about" />
       <Reveal className="split-section">
+        <div className="section-heading about-heading">
+          <p className="eyebrow">{portfolio.about.eyebrow}</p>
+          <h2 id="about-heading">Curious across disciplines.</h2>
+        </div>
         <figure className="about-portrait">
           <Image
             src={withBasePath("/assets/optimized/profile.webp")}
@@ -19,10 +23,6 @@ export function About() {
           />
         </figure>
         <div className="about-content">
-          <div className="section-heading about-heading">
-            <p className="eyebrow">{portfolio.about.eyebrow}</p>
-            <h2 id="about-heading">Curious across disciplines.</h2>
-          </div>
           <p>{portfolio.about.body}</p>
           <div className="focus-list">
             <span className="meta-label">Current focus</span>
