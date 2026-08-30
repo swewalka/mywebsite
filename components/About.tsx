@@ -19,7 +19,7 @@ export function About() {
             alt={`Portrait of ${portfolio.name}`}
             width={1000}
             height={1500}
-            sizes="(max-width: 767px) calc(100vw - 48px), 36vw"
+            sizes="(max-width: 767px) and (orientation: portrait) min(58vw, 230px), (max-width: 767px) min(72vw, 320px), 36vw"
           />
         </figure>
         <div className="about-content">

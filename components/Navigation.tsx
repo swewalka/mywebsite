@@ -23,6 +23,16 @@ export function Navigation() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const closeMenuAtDesktopWidth = (event: MediaQueryListEvent) => {
+      if (!event.matches) setIsOpen(false);
+    };
+
+    mobileQuery.addEventListener("change", closeMenuAtDesktopWidth);
+    return () => mobileQuery.removeEventListener("change", closeMenuAtDesktopWidth);
+  }, []);
+
   return (
     <header className={`site-nav ${hasScrolled || isOpen ? "site-nav--scrolled" : ""}`}>
       <div className="site-container nav-inner">

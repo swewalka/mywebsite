@@ -74,11 +74,21 @@ function createFlight(id: number, isMobile: boolean, zone: TrafficZone): Flight 
 
 export function SpaceTraffic({ zone }: { zone: TrafficZone }) {
   const reduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
   const [isNearby, setIsNearby] = useState(false);
   const [flight, setFlight] = useState<Flight | null>(null);
   const layerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nextId = useRef(0);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const updateMobileState = () => setIsMobile(mobileQuery.matches);
+
+    updateMobileState();
+    mobileQuery.addEventListener("change", updateMobileState);
+    return () => mobileQuery.removeEventListener("change", updateMobileState);
+  }, []);
 
   const clearTimer = useCallback(() => {
     if (timerRef.current) {
@@ -107,7 +117,6 @@ export function SpaceTraffic({ zone }: { zone: TrafficZone }) {
       return clearTimer;
     }
 
-    const isMobile = window.matchMedia("(max-width: 640px)").matches;
     let cancelled = false;
 
     const schedule = (initial: boolean) => {
@@ -127,13 +136,12 @@ export function SpaceTraffic({ zone }: { zone: TrafficZone }) {
       cancelled = true;
       clearTimer();
     };
-  }, [clearTimer, isNearby, reduceMotion, zone]);
+  }, [clearTimer, isMobile, isNearby, reduceMotion, zone]);
 
   const handleComplete = () => {
     setFlight(null);
     if (reduceMotion || !isNearby) return;
 
-    const isMobile = window.matchMedia("(max-width: 640px)").matches;
     clearTimer();
 
     const delay = between(isMobile ? 18 : 12, isMobile ? 30 : 22) * 1000;
