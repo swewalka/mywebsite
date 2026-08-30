@@ -787,6 +787,12 @@ button {
   place-items: center;
 }
 
+.project-planet-carousel-motion {
+  display: grid;
+  width: 100%;
+  place-items: center;
+}
+
 .project-planet-reveal {
   display: grid;
   position: relative;
@@ -1453,7 +1459,7 @@ button {
   .project-list {
     display: flex;
     align-items: stretch;
-    gap: 1.5rem;
+    gap: 0;
     margin-top: 1.5rem;
     padding: 3rem 0 1.25rem;
     overflow-x: auto;
@@ -1462,6 +1468,13 @@ button {
     scrollbar-color: rgba(220, 138, 96, 0.45) transparent;
     scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .project-planet-carousel-motion {
+    position: relative;
+    z-index: 0;
+    transform-origin: center;
+    will-change: transform, opacity;
   }
 
   .project-list::-webkit-scrollbar {
@@ -1498,12 +1511,17 @@ button {
     flex: 0 0 100%;
     min-width: 0;
     max-width: 100%;
-    padding-bottom: 3.75rem;
+    padding-bottom: 1.25rem;
     grid-template-columns: minmax(0, 1fr);
     gap: 2.25rem;
     align-content: start;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+  }
+
+  .project-copy {
+    position: relative;
+    z-index: 1;
   }
 
   .project-entry::before {
@@ -1543,11 +1561,9 @@ button {
   }
 
   .project-links {
-    position: absolute;
-    bottom: 0.75rem;
-    left: 0;
+    position: static;
     justify-content: flex-start;
-    margin-top: 0;
+    margin-top: 1.35rem;
   }
 
   .project-links a,
@@ -1911,7 +1927,24 @@ button {
   }
 
   #work .project-links {
-    margin-top: 0;
+    margin-top: 1.35rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #work .project-list {
+    width: calc(100% + 48px);
+    margin-right: -24px;
+    margin-left: -24px;
+  }
+
+  #work .project-entry,
+  #work .project-entry--planet-right {
+    padding-inline: 24px;
+  }
+
+  #work .project-links {
+    margin-top: 1.35rem;
   }
 }
 
@@ -1931,5 +1964,10 @@ button {
 
   .flying-object {
     display: none !important;
+  }
+
+  .project-planet-carousel-motion {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

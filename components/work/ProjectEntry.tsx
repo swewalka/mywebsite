@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import type { Project } from "@/config/portfolio";
 import { ProjectPlanet } from "./ProjectPlanet";
 
@@ -8,6 +14,7 @@ type ProjectEntryProps = {
   project: Project;
   index: number;
   total: number;
+  carouselRef: RefObject<HTMLDivElement | null>;
 };
 
 type ProjectLink = {
@@ -42,18 +49,68 @@ function getProjectLinks(project: Project): ProjectLink[] {
   ].filter((link): link is ProjectLink => link !== null);
 }
 
-export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
+export function ProjectEntry({
+  project,
+  index,
+  total,
+  carouselRef,
+}: ProjectEntryProps) {
   const reduceMotion = useReducedMotion();
+  const entryRef = useRef<HTMLElement>(null);
+  const [isMobileCarousel, setIsMobileCarousel] = useState(false);
   const orientation = index % 2 === 0 ? "planet-left" : "planet-right";
   const links = getProjectLinks(project);
+  const { scrollXProgress } = useScroll({
+    container: carouselRef,
+    target: entryRef,
+    axis: "x",
+    offset: ["start end", "end start"],
+  });
+  const planetX = useTransform(
+    scrollXProgress,
+    [0, 0.5, 1],
+    ["-42vw", "0vw", "42vw"],
+  );
+  const planetScale = useTransform(scrollXProgress, [0, 0.5, 1], [0.68, 1, 0.68]);
+  const planetOpacity = useTransform(scrollXProgress, [0, 0.5, 1], [0.28, 1, 0.28]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateCarouselMode = () => setIsMobileCarousel(mediaQuery.matches);
+
+    updateCarouselMode();
+    mediaQuery.addEventListener("change", updateCarouselMode);
+
+    return () => mediaQuery.removeEventListener("change", updateCarouselMode);
+  }, []);
+
+  const animateWithCarousel = isMobileCarousel && !reduceMotion;
 
   return (
     <article
+      ref={entryRef}
       className={`project-entry project-entry--${orientation}`}
       aria-label={`Project ${index + 1} of ${total}: ${project.title}`}
     >
       <div className="project-visual">
-        <ProjectPlanet project={project} projectIndex={index} />
+        <motion.div
+          className="project-planet-carousel-motion"
+          style={
+            animateWithCarousel
+              ? {
+                  x: planetX,
+                  scale: planetScale,
+                  opacity: planetOpacity,
+                }
+              : undefined
+          }
+        >
+          <ProjectPlanet
+            project={project}
+            projectIndex={index}
+            isMobileCarousel={isMobileCarousel}
+          />
+        </motion.div>
       </div>
 
       <div className="project-copy">

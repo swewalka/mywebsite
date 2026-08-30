@@ -1,8 +1,13 @@
+"use client";
+
+import { useRef } from "react";
 import { portfolio } from "@/config/portfolio";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProjectEntry } from "@/components/work/ProjectEntry";
 
 export function Projects() {
+  const projectListRef = useRef<HTMLDivElement>(null);
+
   return (
     <section id="work" className="section site-container" aria-labelledby="work-heading">
       <Reveal>
@@ -15,6 +20,7 @@ export function Projects() {
         Swipe to explore <span>←&nbsp;&nbsp;→</span>
       </p>
       <div
+        ref={projectListRef}
         className="project-list"
         role="region"
         aria-label="Selected projects"
@@ -25,6 +31,7 @@ export function Projects() {
             project={project}
             index={index}
             total={portfolio.projects.length}
+            carouselRef={projectListRef}
           />
         ))}
       </div>
