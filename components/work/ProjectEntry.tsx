@@ -56,21 +56,37 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
         <ProjectPlanet project={project} projectIndex={index} />
       </div>
 
-      <motion.div
-        className="project-copy"
-        initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.35 }}
-        transition={{ duration: 0.58, delay: reduceMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <p className="project-index">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </p>
-        <h3>{project.title}</h3>
-        {project.status ? <p className="project-status">{project.status}</p> : null}
-        <p className="project-description">{project.description}</p>
+      <div className="project-copy">
+        <motion.div
+          className="project-copy-content"
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.35 }}
+          transition={{
+            duration: 0.58,
+            delay: reduceMotion ? 0 : 0.08,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          <p className="project-index">
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </p>
+          <h3>{project.title}</h3>
+          {project.status ? <p className="project-status">{project.status}</p> : null}
+          <p className="project-description">{project.description}</p>
+        </motion.div>
         {links.length > 0 ? (
-          <div className="project-links">
+          <motion.div
+            className="project-links"
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.35 }}
+            transition={{
+              duration: 0.5,
+              delay: reduceMotion ? 0 : 0.14,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
             {links.map((link) => (
               <a
                 key={link.label}
@@ -83,9 +99,9 @@ export function ProjectEntry({ project, index, total }: ProjectEntryProps) {
                 <span aria-hidden="true">↗</span>
               </a>
             ))}
-          </div>
+          </motion.div>
         ) : null}
-      </motion.div>
+      </div>
     </article>
   );
 }
