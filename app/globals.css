@@ -468,7 +468,7 @@ button {
   bottom: 2.5rem;
   left: 43%;
   overflow: hidden;
-  pointer-events: auto;
+  pointer-events: none;
   mask-image: linear-gradient(90deg, transparent 0, black 17%, black 100%);
 }
 
